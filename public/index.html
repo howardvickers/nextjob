@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+      <link rel="stylesheet" href="/main.css">
+   </head>
+   <body>
+      <!--VUE-->
+      <div id="app">
+         <div class="container" >
+            <div>
+               </br>
+               <a class="" href="#"><img alt="logo" src="/img/nextjobsite_logo.png"></a>
+            </div>
+         </div>
+         <div class="row" align="center">
+            <div  class="col-4 card border rounded-0 classWithPad" style="width: 18rem;">
+               <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-user-plus"></i>
+               <div style="background-color:#FAF9F9" class="card-body classWithPad">
+                  <h5 style="color:#395A4E" class="card-title">New User</h5>
+                  <div class="container" >
+                     <form class="form form-group " v-on:submit="createUser">
+                        <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
+                        <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="P/W">
+                        <button v-on:click="Register" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
+                     </form>
+                     <p></p>
+                     <p>
+                  </div>
+               </div>
+            </div>
+            <div  class="col-4 card border rounded-0 classWithPad" style="width: 18rem;">
+               <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-sign-in-alt"></i>
+               <div style="background-color:#FAF9F9" class="card-body classWithPad">
+                  <h5 style="color:#395A4E" class="card-title">Existing User</h5>
+                  <div class="container" >
+                     <form class="form form-group " v-on:submit="signInUser">
+                        <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
+                        <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="P/W">
+                        <button v-on:click="Login" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
+                     </form>
+                     <p class="signInUser">{{signin_msg}}</p>
+                     <p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <p small>* Logo made with Logomakr.com</p>
+      </div>
+      <script src="/main.js"></script>
+   </body>
+</html>

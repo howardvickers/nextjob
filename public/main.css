@@ -1,0 +1,111 @@
+.square-corner{
+  border-radius: 0;
+  color: pink;
+}
+
+.card-body {
+  max-height: 250px;
+}
+.classWithPad {
+  margin:10px;
+  padding:10px;
+}
+
+.btn{
+  border-radius: 0;
+}
+
+.form{
+  font-family: Arial, Helvetica, sans-serif;
+  color: blue;
+}
+
+.title{
+    font-family: Arial, Helvetica, sans-serif;
+    color: green;
+
+}
+
+.invisible{
+    display: hidden;
+}
+
+.questionWord{
+    text-align: center;
+}
+.well:hover {
+    background-color: lightblue;
+}
+
+#correct:hover {
+    /* background-color:  #70db70; */
+}
+
+.panelSize {
+    /* width: 200px; */
+}
+
+.panelHeight {
+     height: 440px;
+}
+
+.panelHeightLow {
+     height: 1000px;
+}
+
+.wellHeight {
+     height: 60px;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: lightblue;
+}
+
+.navbar {
+    height: 75px;
+}
+.hidden1{
+    display: none;
+}
+
+.hidden2{
+    display: none;
+}
+
+.correct{
+    /* background-color: #70db70; */
+    text-align: center;
+}
+.incorrect {
+    /* background-color:  #ff4d4d; */
+    text-align: center;
+}
+
+.table{
+    width: 97%;
+}
+
+.video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.frontTitle {
+    padding: 60px;
+    align-content: center;
+    margin: 10px;
+    border: 1px solid white;
+    width: 600px;
+    border-radius: 5px;
+    color: blue;
+    font-size: 60px;
+}
