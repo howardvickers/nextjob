@@ -139,7 +139,7 @@ app.get('/me/ops', function(req, res, next){
     })
 })
 
-var port = 8080
+var port = 80
 app.listen(port, function(){
   console.log('Listening on port:', port)
 })
