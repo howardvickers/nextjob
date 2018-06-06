@@ -7,7 +7,7 @@ var mainVm = new Vue({
         oldUserPassword: '',
         user: {},
         href: '',
-        signin_msg = '',
+        // signin_msg = '',
         allCompanys: [],
         jobAds: [],
         isInVisible: true,
