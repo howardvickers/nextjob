@@ -15,45 +15,54 @@
    <body>
       <!--VUE-->
       <div id="app">
-         <div class="container" >
-            <div>
+         <div class="container text-center" >
+            <div  class="" >
                </br>
-               <a class="" href="#"><img alt="logo" src="/img/nextjobsite_logo.png"></a>
+               <img alt="logo" class="text-center" style="width: 200px; height: 150px" src="/img/nextjobsite_logo.png"></a>
             </div>
          </div>
-         <div class="row" align="center">
-            <div  class="col-4 card border rounded-0 classWithPad" style="width: 18rem;">
-               <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-user-plus"></i>
-               <div style="background-color:#FAF9F9" class="card-body classWithPad">
-                  <h5 style="color:#395A4E" class="card-title">New User</h5>
-                  <div class="container" >
-                     <form class="form form-group " v-on:submit="createUser">
-                        <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
-                        <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="P/W">
-                        <button v-on:click="Register" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
-                     </form>
-                     <p></p>
-                     <p>
+         <div class="container" >
+            <div class="row" align="center">
+               <div  class="col-5 card border rounded-0 classWithPad" style="width: 18rem;">
+                  <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-user-plus"></i>
+                  <div style="background-color:#FAF9F9" class="card-body classWithPad">
+                     <h5 style="color:#395A4E" class="card-title">New User</h5>
+                     <div class="container" >
+                        <form class="form form-group " v-on:submit="createUser">
+                           <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
+                           <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
+                           <button v-on:click="Register" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
+                        </form>
+                        <p></p>
+                        <p>
+                     </div>
+                  </div>
+               </div>
+               <div  class="col-5 card border rounded-0 classWithPad" style="width: 18rem;">
+                  <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-sign-in-alt"></i>
+                  <div style="background-color:#FAF9F9" class="card-body classWithPad">
+                     <h5 style="color:#395A4E" class="card-title">Existing User</h5>
+                     <div class="container" >
+                        <form class="form form-group " v-on:submit="signInUser">
+                           <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
+                           <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="Password">
+                           <button v-on:click="Login" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
+                        </form>
+                        <p class="signInUser">{{signin_msg}}</p>
+                        <p>
+                     </div>
                   </div>
                </div>
             </div>
-            <div  class="col-4 card border rounded-0 classWithPad" style="width: 18rem;">
-               <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-sign-in-alt"></i>
-               <div style="background-color:#FAF9F9" class="card-body classWithPad">
-                  <h5 style="color:#395A4E" class="card-title">Existing User</h5>
-                  <div class="container" >
-                     <form class="form form-group " v-on:submit="signInUser">
-                        <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
-                        <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="P/W">
-                        <button v-on:click="Login" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
-                     </form>
-                     <p class="signInUser">{{signin_msg}}</p>
-                     <p>
-                  </div>
-               </div>
-            </div>
          </div>
-         <p small>* Logo made with Logomakr.com</p>
+         <footer class="footer">
+            <div class="container" align="center">
+               <a href="https://www.linkedin.com/in/howardvickers/" class="btn btn-social-icon btn-linkedin"><i class="fab fa-linkedin"></i></i></i></a>
+               <a href="https://github.com/howardvickers/" class="btn btn-social-icon btn-github"><i class="fab fa-github"></i></a>
+               </p>
+               <p class="smallText text-center">* Logo made with Logomakr.com</p>
+            </div>
+         </footer>
       </div>
       <script src="/main.js"></script>
    </body>

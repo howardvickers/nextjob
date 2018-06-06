@@ -14,28 +14,15 @@
    </head>
    <body>
       <div id="app">
-         <!--NAVBAR-->
-         <nav class="navbar navbar-default">
-            <div class="container-fluid">
-               <!-- Brand and toggle get grouped for better mobile display -->
-               <div class="navbar-header">
-                  <a class="navbar-brand" href="#"><img alt="Custard" src="/img/nextjobsite_logo.png"></a>
-               </div>
-               <!-- Collect the nav links, forms, and other content for toggling -->
-               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <form class="navbar-form navbar-right" v-on:submit="logOutUser">
-                     <div class="form form-group">
-                        <p>
-                        <p>
-                           <input type="submit" value="Logout" class="btn btn-default btnColor square-corner">
-                     </div>
-                  </form>
-                  <h2 class="welcome text-center">Hello {{user.username}}</h2>
-               </div>
-               <!-- /.navbar-collapse -->
+         <div class="container text-center" >
+            <div  class="" >
+               </br>
+               <img alt="logo" class="text-center" style="width: 200px; height: 150px" src="/img/nextjobsite_logo.png"></a>
             </div>
-            <!-- /.container-fluid -->
-         </nav>
+         </div>
+         <div class="container" >
+            <h2  style="color:#395A4E" class="card-title text-center">Hello {{user.username}}</h2>
+         </div>
          <div class="container" >
             <div class="row">
                <div  class="col-4 card border rounded-0 classWithPad" style="width: 18rem;">
@@ -197,6 +184,14 @@
                </div>
             </div>
          </div>
+         <footer class="footer">
+            <div class="container" align="center">
+               <a href="https://www.linkedin.com/in/howardvickers/" class="btn btn-social-icon btn-linkedin"><i class="fab fa-linkedin"></i></i></i></a>
+               <a href="https://github.com/howardvickers/" class="btn btn-social-icon btn-github"><i class="fab fa-github"></i></a>
+               </p>
+               <p class="smallText text-center">* Logo made with Logomakr.com</p>
+            </div>
+         </footer>
       </div>
       <script src="/main.js"></script>
    </body>
