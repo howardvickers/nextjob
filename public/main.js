@@ -43,10 +43,7 @@ var mainVm = new Vue({
             }),
 
             $.get('/dash/jobads', (data) => {
-              console.log('calling /dash/jobads !!!');
                 this.jobAds = data
-                console.log('44444 data:',data);
-                console.log('44444 this.jobAds:', this.jobAds)
             }).then((data) => {
               console.log('5555 data:', data);
             })
@@ -122,6 +119,34 @@ var mainVm = new Vue({
                 }
             })
             // this.createEmpty()
+        },
+
+
+        createCoOp: function(event) {
+          var data = event.target.dataset
+          console.log('data: ', data);
+          console.log('event:', event);
+          event.preventDefault()
+          $.ajax({
+              url: '/create-op',
+              type: 'POST',
+              data: JSON.stringify({
+                  _custarduser: mainVm.user._id,
+                  opjobtitle: data.adJobtitle,
+                  opemployer: data.adEmployer,
+                  oplocation: data.adLocation,
+                  opurl: data.adUrl
+              }),
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              success: function(dataFromServer) {
+                  console.log('/create-op dataFromServer: ', dataFromServer)
+                  if (dataFromServer.success) {
+                      mainVm.getMyCompanys()
+                      console.log('success! yay!');
+                  }
+              }
+          })
         },
 
         signInUser: function(event) {
