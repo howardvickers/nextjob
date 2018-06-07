@@ -15,7 +15,7 @@ var CustardOp = require('./db').CustardOp
 
 
 let doScrape = async () => {
-// function (keyword, location){
+// function (keyword, city, state){
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
   var url_to_scrape = 'https://www.themuse.com/jobs?keyword%5B%5D=javascript&job_location%5B%5D=Boulder%2C%20CO&filter=true'
@@ -34,7 +34,6 @@ let doScrape = async () => {
         let url_begin = loco.concat(thehref)
         let url_end = "'"
         let url = url_begin.concat(url_end)
-        console.log(location, loco, url);
 
         data.push({job_title, employer, location, url}); // Push an object with the data onto our array
       }

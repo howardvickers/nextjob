@@ -112,7 +112,7 @@
                            </tr>
                            <tr v-if="allOps.length" v-for="(item, i) in allOps">
                               <td>
-                                 {{item.opname}}
+                                 {{item.opjobtitle}}
                               </td>
                               <td>
                                  {{item.companyname}}
@@ -174,7 +174,9 @@
                                  <button :onclick="href=ad.url" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Visit</button>
                               </td>
                               <td>
-                                 <button v-on:click="createCoOp" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
+                                <!-- :data-ad-jobtitle="add.jobtitle" -->
+                                <!-- <button data-ad="{employer:google, salary: 70000}">Add Job</button> -->
+                                 <button :data-ad-jobtitle="ad.job_title" :data-ad-employer="ad.employer" :data-ad-location="ad.location" :data-ad-url="ad.url" v-on:click="createCoOp" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
                               </td>
                               <!-- </form> -->
                            </tr>

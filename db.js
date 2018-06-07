@@ -34,9 +34,12 @@ var companySchema = new mongoose.Schema({
 var CustardCompany = mongoose.model('custardcompany', companySchema)
 
 var opSchema = new mongoose.Schema({
-  _custardcompany: {type: mongoose.Schema.Types.ObjectId},
+  // _custardcompany: {type: mongoose.Schema.Types.ObjectId},
   _custarduser: {type:mongoose.Schema.Types.ObjectId},
-  opname: {type:String, required: true},
+  opjobtitle: {type:String, required: true},
+  oplocation: {type:String},
+  opemployer: {type:String},
+  opurl: {type:String},
   opstage: {type:String},
 })
 
