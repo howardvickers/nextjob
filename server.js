@@ -34,8 +34,9 @@ let doScrape = async () => {
         let url_begin = loco.concat(thehref)
         let url_end = "'"
         let url = url_begin.concat(url_end)
+        let status = 'Interested'
 
-        data.push({job_title, employer, location, url}); // Push an object with the data onto our array
+        data.push({job_title, employer, location, url, status}); // Push an object with the data onto our array
       }
       return data; // Return data array
   });
@@ -113,6 +114,38 @@ app.get('/dash/companys', function(req, res, next){
     }
   })
 })
+
+
+app.get('/dash/ops', function(req, res, next){
+  console.log('/dash/ops called!');
+  CustardOp.find({_custarduser: user._id}, function(err, data){
+    if (err) { next(err)
+    } else {
+      res.send(data)
+      console.log('Look! /dash/ops data:', data)
+    }
+  })
+});
+
+app.post('/dash/delete_ops', function(req, res, next) {
+  console.log('req.body:', req.body);
+  var data = req.body
+
+  // console.log('req.body:', req.body['{"opURL":"location.href']);
+  // var reqbody = req.body['{"opURL":"location.href'] || req.query['{"opURL":"location.href']
+  //  var opURL = '\'' + 'location.href=\\' + reqbody.slice(0, -3) + '\\' + '\'' + '\'';
+  //  var opURL_str = String(opURL)
+  //  console.log('opURL: ', opURL_str);
+
+
+  CustardOp.findOneAndRemove({opemployer: data.opEmployer, oplocation: data.opLocation, opjobtitle: data.opJobtitle}, function(err, opschema) {
+    if (err) { res.json({"err": err});
+  } else {
+        console.log(opschema + " removed!");
+   }
+});
+
+});
 
 // app.get('/dash/jobads', function(keyword, city, state){
 // var scrapedData = doScrape(keyword, city, state)

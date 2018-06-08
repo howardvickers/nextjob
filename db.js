@@ -39,8 +39,8 @@ var opSchema = new mongoose.Schema({
   opjobtitle: {type:String, required: true},
   oplocation: {type:String},
   opemployer: {type:String},
-  opurl: {type:String},
-  opstage: {type:String},
+  opurl: {type:String, unique: true},
+  opstatus: {type:String},
 })
 
 var CustardOp = mongoose.model('custardop', opSchema)
