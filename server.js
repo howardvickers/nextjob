@@ -14,12 +14,15 @@ var CustardCompany = require('./db').CustardCompany
 var CustardOp = require('./db').CustardOp
 
 
-let doScrape = async () => {
+let doScrape = async function(keyword, city, state) {
 // function (keyword, city, state){
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
-  var url_to_scrape = 'https://www.themuse.com/jobs?keyword%5B%5D=javascript&job_location%5B%5D=Boulder%2C%20CO&filter=true'
+  var url_to_scrape = 'https://www.themuse.com/jobs?keyword%5B%5D='+keyword+'&job_location%5B%5D='+city+'%2C%20'+state+'&filter=true'
   await page.goto(url_to_scrape);
+
+
+
 
   const result = await page.evaluate(() => {
       let data = []; // Create an empty array that will store our data
@@ -158,7 +161,14 @@ app.post('/dash/delete_ops', function(req, res, next) {
 // })
 
 app.get('/dash/jobads', function(req, res, next){
-  var scrapedData = doScrape().then((value) => res.send(value) );
+  console.log('req.body:' , req.body);
+  var scrapedData = doScrape('Java', 'Golden', 'CO').then((value) => res.send(value) );
+})
+
+
+app.post('/scrape', function(req, res, next){
+  console.log('req.body:' , req.body);
+  var scrapedData = doScrape(req.body.kw, req.body.cty, req.body.ste,).then((value) => res.send(value) );
 })
 
 app.get('/me/ops', function(req, res, next){

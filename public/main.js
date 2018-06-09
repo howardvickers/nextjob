@@ -14,6 +14,9 @@ var mainVm = new Vue({
         isInVisible: true,
         isVisible: false,
         invisible: '',
+        enterState: '',
+        enterCity: '',
+        enterKeyword: '',
         enterCompanyName: '',
         enterCompanyPerson: '',
         enterCompanyAddress: '',
@@ -34,13 +37,13 @@ var mainVm = new Vue({
             console.log('77777 data:', data);
             console.log('777 this.allOps:', this.allOps)
         }).then(() => {
-        }),
+        })
 
-        $.get('/dash/jobads', (data) => {
-                this.jobAds = data
-            }).then((data) => {
-              console.log('5555 data:', data);
-            })
+        // $.get('/dash/jobads', (data) => {
+        //         this.jobAds = data
+        //     }).then((data) => {
+        //       console.log('5555 data:', data);
+        //     })
     },
 
     methods: {
@@ -58,6 +61,13 @@ var mainVm = new Vue({
                 console.log('888 this.allOps:', this.allOps)
             }).then(() => {
             })
+        },
+
+
+        getJobAds: function(data) {
+            this.jobAds = data
+            console.log('222 this.jobAds:', this.jobAds)
+
         },
 
         createUser: function(event) {
@@ -80,6 +90,67 @@ var mainVm = new Vue({
                     }
                 }
             })
+        },
+
+
+        // theSearch: function(event) {
+        //     event.preventDefault()
+        //     console.log('this.keyword:', this.enterKeyword);
+        //     // var that = this
+        //     $.ajax({
+        //         url: '/dash/jobads',
+        //         type: 'POST',
+        //         data: JSON.stringify({
+        //             kw: this.enterKeyword,
+        //             cty: this.enterCity,
+        //             ste: this.enterState
+        //         }),
+        //         contentType: 'application/json; charset=utf-8',
+        //         dataType: 'json',
+        //         success: function(dataFromServer) {
+        //             console.log('/dash/ops dataFromServer: ', dataFromServer)
+        //             // if (dataFromServer.success) {
+        //             //     window.location.href = "/dashboard.html"
+        //             // }
+        //         }
+        //     })
+        //     console.log('data:', this);
+        //
+        // },
+
+
+        doSearch: function(event) {
+            event.preventDefault()
+            console.log('this.keyword:', this.enterKeyword);
+            // var that = this
+            $.ajax({
+                url: '/scrape',
+                type: 'POST',
+                data: JSON.stringify({
+                    kw: this.enterKeyword,
+                    cty: this.enterCity,
+                    ste: this.enterState
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(dataFromServer) {
+                    console.log('/scrape dataFromServer: ', dataFromServer)
+                    this.jobAds = dataFromServer
+                    console.log('this.jobAds:', this.jobAds);
+                    mainVm.getJobAds(dataFromServer)
+
+                }
+            })
+            // console.log('this is data.kw:', data.kw);
+
+
+                    // $.get('/dash/jobads', (data) => {
+                    //         this.jobAds = data
+                    //     }).then((data) => {
+                    //       console.log('5555 data:', data);
+                    //     })
+                // },
+
         },
 
         createCoOp: function(event) {
@@ -187,19 +258,6 @@ var mainVm = new Vue({
           this.getMyOps()
            },
 
-       // $('buttons.remove.doc').on('click', function() {
-       //       var userId = $(this).attr('data-id');
-       //       $.ajax({
-       //          method: "POST",
-       //          url: "/users/delete",
-       //          data: {"userId": userId},
-       //          success: function(result) {
-       //             if(/* check if it is ok */) {
-       //                 location.reload();
-       //             }
-       //          }
-       //       })
-       //    });
 
         createOp: function(event) {
             event.preventDefault()
