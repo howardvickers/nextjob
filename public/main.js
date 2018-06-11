@@ -1,6 +1,23 @@
+
+Vue.component('modal', {
+  template:
+  `<div class="modal is-active">
+  <div class="modal-background">
+  </div>
+  <div class="modal-content">
+  <div class="box">
+  <p>Some text</p>
+  </div>
+  </div>
+  <buton class="modal-close">close this</button>
+  </div>`
+})
+
+ 
 var mainVm = new Vue({
     el: '#app',
     data: {
+      showModal: false,
         newUserName: '',
         newUserPassword: '',
         oldUserName: '',

@@ -15,8 +15,8 @@ var CustardOp = require('./db').CustardOp
 
 
 let doScrape = async function(keyword, city, state) {
-// function (keyword, city, state){
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+  // const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
   var url_to_scrape = 'https://www.themuse.com/jobs?keyword%5B%5D='+keyword+'&job_location%5B%5D='+city+'%2C%20'+state+'&filter=true'
   await page.goto(url_to_scrape);
