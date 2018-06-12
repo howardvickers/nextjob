@@ -54,6 +54,9 @@
                                  Status
                               </th>
                               <th>
+                                 To-Do
+                              </th>
+                              <th>
                                  Update?
                               </th>
                               <th>
@@ -77,7 +80,10 @@
                                  {{item.opstatus}}
                               </td>
                               <td>
-                                <button v-on:click="openModal" :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" type="button" class="btn btn-sm" data-toggle="modal" :data-modal-target="hashmodalID(item.opurl)" style="color:#FAF9F9; background-color:#867255">Update</button>
+                                 {{item.optodo}}
+                              </td>
+                              <td>
+                                <button v-on:click="openModal" :data-optodo="item.optodo" :data-opstatus="item.opstatus" :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" type="button" class="btn btn-sm" data-toggle="modal" :data-modal-target="hashmodalID(item.opurl)" style="color:#FAF9F9; background-color:#867255">Update</button>
 
                                  <!-- Modal -->
                                  <div class="modal" v-bind:id="modalID(item.opurl)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,17 +97,39 @@
                                          </button>
                                        </div>
                                        <div class="modal-body">
-                                         <h6>Change status:</h6>
-
-                                           <select v-on:change="editOp" data-opstatus="item.opstatus" id="sqSelect" class="select-wrapper form-control rounded-0" v-model="status" >
-                                             <option required value="IN">Interested</option>
-                                             <option value="AP">Applied</option>
-                                             <option value="JI">Job Interview</option>
-                                             <option value="OF">Offer</option>
-                                             <option value="RJ">Rejected</option>
+                                         <table>
+                                           <tr>
+                                             <th></th>
+                                             <th>Status</th>
+                                             <th>To-Do</th>
+                                           </tr>
+                                           <tr>
+                                             <td>Current</td>
+                                             <td>{{item.opstatus}}</td>
+                                             <td>{{item.optodo}}</td>
+                                           </tr>
+                                           <tr>
+                                             <td>New: </td>
+                                             <td>
+                                               <select v-on:change="editOp" data-opstatus="item.opstatus" id="" class="select-wrapper form-control rounded-0" v-model="status" >
+                                             <option required value="consider">Consider</option>
+                                             <option value="applied">Applied</option>
+                                             <option value="interview">Interview</option>
+                                             <option value="offer">Offer</option>
+                                             <option value="declined">Declined</option>
+                                             <option value="rejected">Rejected</option>
                                            </select>
-
-
+                                         </td>
+                                         <td>
+                                           <select v-on:change="editOp" data-opstatus="item.optodo" id="" class="select-wrapper form-control rounded-0" v-model="todo" >
+                                         <option required value="apply">Apply</option>
+                                         <option value="nothing">Nothing</option>
+                                         <option value="contact">Contact</option>
+                                         <option value="meet">Meeting</option>
+                                       </select>
+                                     </td>
+                                       </tr>
+                                     </table>
                                        </div>
                                        <div class="modal-footer">
                                          <button type="button" class="btn btn-sm" style="color:#FAF9F9; background-color:#A2DAE8" data-dismiss="modal">Cancel</button>
@@ -228,7 +256,7 @@
                                  <button :onclick="href=ad.url" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >View</button>
                               </td>
                               <td>
-                                <button :data-ad-jobtitle="ad.job_title" :data-ad-employer="ad.employer" :data-ad-location="ad.location" :data-ad-opstatus="ad.status" :data-ad-url="ad.url" v-on:click="createCoOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
+                                <button :data-ad-jobtitle="ad.job_title" :data-ad-employer="ad.employer" :data-ad-location="ad.location" :data-ad-status="ad.status" :data-ad-todo="ad.status" :data-ad-url="ad.url" v-on:click="createCoOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
                               </td>
                            </tr>
                         </table>

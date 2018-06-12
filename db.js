@@ -40,6 +40,7 @@ var opSchema = new mongoose.Schema({
   oplocation: {type:String},
   opemployer: {type:String},
   opurl: {type:String, unique: true},
+  optodo: {type:String},
   opstatus: {type:String},
 })
 

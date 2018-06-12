@@ -198,12 +198,42 @@ var mainVm = new Vue({
                   opemployer: data.adEmployer,
                   oplocation: data.adLocation,
                   opurl: data.adUrl,
-                  opstatus: data.adOpstatus
+                  optodo: data.adTodo,
+                  opstatus: data.adStatus
               }),
               contentType: 'application/json; charset=utf-8',
               dataType: 'json',
               success: function(dataFromServer) {
                   console.log('/create-op dataFromServer: ', dataFromServer)
+                  if (dataFromServer.success) {
+                      mainVm.getMyOps()
+                      console.log('success! yay!');
+                  }
+              }
+          })
+        },
+
+        editOp: function(event) {
+          console.log('event', event);
+          var data = event.target.dataset
+          console.log('data: ', data);
+          event.preventDefault()
+          $.ajax({
+              url: '/edit-op',
+              type: 'POST',
+              data: JSON.stringify({
+                  _custarduser: mainVm.user._id,
+                  opjobtitle: data.adJobtitle,
+                  opemployer: data.adEmployer,
+                  oplocation: data.adLocation,
+                  opurl: data.adUrl,
+                  optodo: data.adTodo,
+                  opstatus: data.adStatus
+              }),
+              contentType: 'application/json; charset=utf-8',
+              dataType: 'json',
+              success: function(dataFromServer) {
+                  console.log('/edit-op dataFromServer: ', dataFromServer)
                   if (dataFromServer.success) {
                       mainVm.getMyOps()
                       console.log('success! yay!');
@@ -241,34 +271,34 @@ var mainVm = new Vue({
             window.location.href = "/index.html"
         },
 
-        createCompany: function(event) {
-            event.preventDefault()
-            $.ajax({
-                url: '/create-company',
-                type: 'POST',
-                data: JSON.stringify({
-                    _custarduser: mainVm.user._id,
-                    companyname: this.enterCompanyName,
-                    companyperson: this.enterCompanyPerson,
-                    companyaddress: this.enterCompanyAddress,
-                    companytel: this.enterCompanyTel
-                }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(dataFromServer) {
-                    console.log('/create-company dataFromServer: ', dataFromServer)
-                    if (dataFromServer.success) {
-                        mainVm.getMyCompanys()
-                        console.log('success! yay!');
-                    }
-                }
-            })
-            this.enterCompanyName = ''
-            this.enterCompanyPerson = ''
-            this.enterCompanyAddress = ''
-            this.enterCompanyTel = ''
-            this.confirmAdded()
-        },
+        // createCompany: function(event) {
+        //     event.preventDefault()
+        //     $.ajax({
+        //         url: '/create-company',
+        //         type: 'POST',
+        //         data: JSON.stringify({
+        //             _custarduser: mainVm.user._id,
+        //             companyname: this.enterCompanyName,
+        //             companyperson: this.enterCompanyPerson,
+        //             companyaddress: this.enterCompanyAddress,
+        //             companytel: this.enterCompanyTel
+        //         }),
+        //         contentType: 'application/json; charset=utf-8',
+        //         dataType: 'json',
+        //         success: function(dataFromServer) {
+        //             console.log('/create-company dataFromServer: ', dataFromServer)
+        //             if (dataFromServer.success) {
+        //                 mainVm.getMyCompanys()
+        //                 console.log('success! yay!');
+        //             }
+        //         }
+        //     })
+        //     this.enterCompanyName = ''
+        //     this.enterCompanyPerson = ''
+        //     this.enterCompanyAddress = ''
+        //     this.enterCompanyTel = ''
+        //     this.confirmAdded()
+        // },
 
         deleteOp: function(event) {
           console.log('event', event);
@@ -293,34 +323,34 @@ var mainVm = new Vue({
            },
 
 
-        createOp: function(event) {
-            event.preventDefault()
-            $.ajax({
-                url: '/create-op',
-                type: 'POST',
-                data: JSON.stringify({
-                    _custarduser: mainVm.user._id,
-                    companyname: this.enterCompanyName,
-                    companyperson: this.enterCompanyPerson,
-                    companyaddress: this.enterCompanyAddress,
-                    companytel: this.enterCompanyTel
-                }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(dataFromServer) {
-                    console.log('/create-op dataFromServer: ', dataFromServer)
-                    if (dataFromServer.success) {
-                        mainVm.getMyCompanys()
-                        console.log('success op! yay!');
-                    }
-                }
-            })
-            this.enterCompanyName = ''
-            this.enterCompanyPerson = ''
-            this.enterCompanyAddress = ''
-            this.enterCompanyTel = ''
-            this.confirmAdded()
-        },
+        // createOp: function(event) {
+        //     event.preventDefault()
+        //     $.ajax({
+        //         url: '/create-op',
+        //         type: 'POST',
+        //         data: JSON.stringify({
+        //             _custarduser: mainVm.user._id,
+        //             companyname: this.enterCompanyName,
+        //             companyperson: this.enterCompanyPerson,
+        //             companyaddress: this.enterCompanyAddress,
+        //             companytel: this.enterCompanyTel
+        //         }),
+        //         contentType: 'application/json; charset=utf-8',
+        //         dataType: 'json',
+        //         success: function(dataFromServer) {
+        //             console.log('/create-op dataFromServer: ', dataFromServer)
+        //             if (dataFromServer.success) {
+        //                 mainVm.getMyCompanys()
+        //                 console.log('success op! yay!');
+        //             }
+        //         }
+        //     })
+        //     this.enterCompanyName = ''
+        //     this.enterCompanyPerson = ''
+        //     this.enterCompanyAddress = ''
+        //     this.enterCompanyTel = ''
+        //     this.confirmAdded()
+        // },
 
         confirmAdded: function() {
             this.confirmCompanyAdded = 'New Company Added!'

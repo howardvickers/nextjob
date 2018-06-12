@@ -37,9 +37,10 @@ let doScrape = async function(keyword, city, state) {
         let url_begin = loco.concat(thehref)
         let url_end = "'"
         let url = url_begin.concat(url_end)
-        let status = 'Interested'
+        let status = 'consider'
+        let todo = 'apply'
 
-        data.push({job_title, employer, location, url, status}); // Push an object with the data onto our array
+        data.push({job_title, employer, location, url, status, todo}); // Push an object with the data onto our array
       }
       return data; // Return data array
   });
@@ -89,6 +90,18 @@ app.post('/create-op', function(req, res, next){
   })
 })
 
+
+// app.post('/edit-op', function(req, res, next){
+//   console.log('/edit-op req.body:', req.body)
+//   var newOp = new CustardOp(req.body)
+//   newOp.save(function(err){
+//     if (err){next(err)}
+//     else {
+//       res.send({success:'Successfully created new op'})
+//     }
+//   })
+// })
+
 app.post('/signin-user', function(req, res, next){
     console.log('/signin-user req.body:', req.body)
     CustardUser.findOne({username: req.body.username}, function(err, data){
@@ -107,16 +120,16 @@ app.get('/dash', function(req, res){
     res.send(user)
 })
 
-app.get('/dash/companys', function(req, res, next){
-  console.log('/dash/companys called!');
-  CustardCompany.find({_custarduser: user._id}, function(err, data){
-    if (err) { next(err)
-    } else {
-      res.send(data)
-      console.log('Yo! /dash/companys data:', data)
-    }
-  })
-})
+// app.get('/dash/companys', function(req, res, next){
+//   console.log('/dash/companys called!');
+//   CustardCompany.find({_custarduser: user._id}, function(err, data){
+//     if (err) { next(err)
+//     } else {
+//       res.send(data)
+//       console.log('Yo! /dash/companys data:', data)
+//     }
+//   })
+// })
 
 
 app.get('/dash/ops', function(req, res, next){
@@ -134,32 +147,31 @@ app.post('/dash/delete_ops', function(req, res, next) {
   console.log('req.body:', req.body);
   var data = req.body
 
-  // console.log('req.body:', req.body['{"opURL":"location.href']);
-  // var reqbody = req.body['{"opURL":"location.href'] || req.query['{"opURL":"location.href']
-  //  var opURL = '\'' + 'location.href=\\' + reqbody.slice(0, -3) + '\\' + '\'' + '\'';
-  //  var opURL_str = String(opURL)
-  //  console.log('opURL: ', opURL_str);
-
 
   CustardOp.findOneAndRemove({opemployer: data.opEmployer, oplocation: data.opLocation, opjobtitle: data.opJobtitle}, function(err, opschema) {
     if (err) { res.json({"err": err});
   } else {
     res.send('success!')
         console.log(opschema + " removed!");
-   }
-});
+      }
+    });
+  });
 
-});
 
-// app.get('/dash/jobads', function(keyword, city, state){
-// var scrapedData = doScrape(keyword, city, state)
-// }
+app.post('/edit_op', function(req, res, next) {
+  console.log('req.body:', req.body);
+  var data = req.body
 
-// app.get('/dash/jobads', function(req, res, next){
-//   var scrapedData = doScrape().then((value) => {console.log(value);} );
-//   res.send(scrapedData)
-//   console.log('This is data from /dash/jobads:', scrapedData)
-// })
+
+  CustardOp.findOneAndUpdate({opemployer: data.opemployer, oplocation: data.oplocation, opjobtitle: data.opjobtitle}, function(err, opschema) {
+    if (err) { res.json({"err": err});
+  } else {
+    {$set: {opstatus: data.opstatus},  {optodo: data.optodo}}
+    res.send('success!')
+        console.log(opschema + " removed!");
+      }
+    });
+  });
 
 app.get('/dash/jobads', function(req, res, next){
   console.log('req.body:' , req.body);
