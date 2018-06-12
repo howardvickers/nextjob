@@ -23,11 +23,11 @@
          </div>
          <div class="container" >
             <div class="row" align="center">
-               <div  class="col-5 card border rounded-0 classWithPad" style="width: 18rem;">
+               <div  class="col card border rounded-0 classWithPad" style="width: 18rem;">
                   <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-user-plus"></i>
                   <div style="background-color:#FAF9F9" class="card-body classWithPad">
                      <h5 style="color:#395A4E" class="card-title">New User</h5>
-                     <div class="container" >
+                     <div class="" >
                         <form class="form form-group " v-on:submit="createUser">
                            <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
@@ -38,11 +38,11 @@
                      </div>
                   </div>
                </div>
-               <div  class="col-5 card border rounded-0 classWithPad" style="width: 18rem;">
+               <div  class="col card border rounded-0 classWithPad" style="width: 18rem;">
                   <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-sign-in-alt"></i>
                   <div style="background-color:#FAF9F9" class="card-body classWithPad">
                      <h5 style="color:#395A4E" class="card-title">Existing User</h5>
-                     <div class="container" >
+                     <div class="" >
                         <form class="form form-group " v-on:submit="signInUser">
                            <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="Password">

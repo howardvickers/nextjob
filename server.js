@@ -144,6 +144,7 @@ app.post('/dash/delete_ops', function(req, res, next) {
   CustardOp.findOneAndRemove({opemployer: data.opEmployer, oplocation: data.opLocation, opjobtitle: data.opJobtitle}, function(err, opschema) {
     if (err) { res.json({"err": err});
   } else {
+    res.send('success!')
         console.log(opschema + " removed!");
    }
 });
@@ -181,7 +182,9 @@ app.get('/me/ops', function(req, res, next){
     })
 })
 
-var port = 8080
+var port = process.env.PORT || 8080
+
+// var port = 8080
 app.listen(port, function(){
   console.log('Listening on port:', port)
 })

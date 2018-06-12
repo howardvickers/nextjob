@@ -27,47 +27,6 @@
 
 
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-              Launch demo modal
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-            <modal v-show="showModal"></modal>
-
-            <button>Show Modal</button>
-
 
 
          </div>
@@ -112,52 +71,32 @@
                                 <a :onclick="href=item.opurl" ><i style="font-size:2em; color:#395A4E; text-align:center" class="far fa-eye"></i></a>
                               </td>
                               <td>
-                                <!-- <select v-on:change="editOp" data-opstatus="item.opstatus" id="sqSelect" class="select-wrapper form-control rounded-0" v-model="status" >
-                                  <option required value="IN">Interested</option>
-                                  <option value="AP">Applied</option>
-                                  <option value="JI">Job Interview</option>
-                                  <option value="OF">Offer</option>
-                                  <option value="RJ">Rejected</option>
-                                </select> -->
-
-                                <!-- Trigger/Open The Modal -->
-                                <!-- <button id="myBtn">Open Modal</button> -->
-
-                                <!-- The Modal -->
-                                <!-- <div id="myModal" class="modal"> -->
-
-                                  <!-- Modal content -->
-                                  <!-- <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <p>Some text in the Modal..</p>
-                                  </div>
-
-                                </div> -->
-
-
-                                <!-- <button :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" v-on:click="editOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#867255">Edit</button> -->
-                                 <!-- {{item.opstatus}} -->
-
-
-
-
-                                 <!-- Button trigger modal -->
-                                 <button :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" type="button" class="btn btn-sm" data-toggle="modal" data-target="#{{item.opjobtitle}}" style="color:#FAF9F9; background-color:#867255">
-                                   Update
+                                <button v-on:click="openModal" :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" type="button" class="btn btn-sm" data-toggle="modal" :data-modal-target="hashmodalID(item.opurl)" style="color:#FAF9F9; background-color:#867255">
+                                   Update This!
                                  </button>
 
                                  <!-- Modal -->
-                                 <div class="modal fade" id="item.opjobtitle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal" v-bind:id="modalID(item.opurl)" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                    <div class="modal-dialog" role="document">
                                      <div class="modal-content">
                                        <div class="modal-header">
-                                         <h5 class="modal-title" id="">{{item.opjobtitle}}</h5>
+                                         <h5 class="modal-title" id="">{{item.opemployer}}: <small>{{item.opjobtitle}}, </small></h5>
+
                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                            <span aria-hidden="true">&times;</span>
                                          </button>
                                        </div>
                                        <div class="modal-body">
-                                         ...
+
+                                           <select v-on:change="editOp" data-opstatus="item.opstatus" id="sqSelect" class="select-wrapper form-control rounded-0" v-model="status" >
+                                             <option required value="IN">Interested</option>
+                                             <option value="AP">Applied</option>
+                                             <option value="JI">Job Interview</option>
+                                             <option value="OF">Offer</option>
+                                             <option value="RJ">Rejected</option>
+                                           </select>
+
+
                                        </div>
                                        <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -166,14 +105,6 @@
                                      </div>
                                    </div>
                                  </div>
-
-
-
-
-
-
-
-
                               </td>
                               <td>
                                 <button :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" v-on:click="deleteOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#7A4E59">Delete</button>

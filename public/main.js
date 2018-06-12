@@ -13,7 +13,7 @@ Vue.component('modal', {
   </div>`
 })
 
- 
+
 var mainVm = new Vue({
     el: '#app',
     data: {
@@ -64,6 +64,20 @@ var mainVm = new Vue({
     },
 
     methods: {
+      modalID: function(url){
+        return btoa(url).replace(/=/g, '')
+      },
+      hashmodalID: function(url){
+        return '#'+btoa(url).replace(/=/g, '')
+      },
+      openModal: function(e) {
+        e.preventDefault()
+        var oModal = e.currentTarget.dataset.modalTarget
+        console.log('oModal:', oModal);
+        $(oModal).modal('toggle')
+
+      },
+
         getMyCompanys: function() {
             $.get('/dash/companys', (data) => {
                 this.allCompanys = data
@@ -271,8 +285,11 @@ var mainVm = new Vue({
             }
             ,
             success: "yay"
+          }).done((msg) => {
+            console.log(msg);
+              this.getMyOps()
           })
-          this.getMyOps()
+
            },
 
 
