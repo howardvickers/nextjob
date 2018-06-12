@@ -182,9 +182,12 @@ app.get('/me/ops', function(req, res, next){
     })
 })
 
-var port = process.env.PORT || 8080
+// var port = process.env.PORT || 8080
+// var port = normalizePort(process.env.PORT || '8080');
+//
+// // var port = 8080
+// app.listen(port, function(){
+//   console.log('Listening on port:', port)
+// })
 
-// var port = 8080
-app.listen(port, function(){
-  console.log('Listening on port:', port)
-})
+app.listen(80)
