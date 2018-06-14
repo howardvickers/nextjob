@@ -54,7 +54,7 @@
                                  Status
                               </th>
                               <th>
-                                 To-Do
+                                 Task
                               </th>
                               <th>
                                  Update?
@@ -97,11 +97,30 @@
                                          </button>
                                        </div>
                                        <div class="modal-body">
-                                         <table>
+                                         <form class="form  " v-on:submit="editOp">
+                                           <h7>Status: </h7>
+                                           <select :data-opstatus="item.opstatus" id="" class="select-wrapper form-control rounded-0" v-model="item.opstatus" >
+                                            <option required value="consider">Consider</option>
+                                            <option value="applied">Applied</option>
+                                            <option value="interview">Interview</option>
+                                            <option value="offer">Offer</option>
+                                            <option value="declined">Declined</option>
+                                            <option value="rejected">Rejected</option>
+                                          </select>
+                                          </br>
+                                          <h7>Task: </h7>
+
+                                             <select :data-optodo="item.optodo" id="" class="select-wrapper form-control rounded-0" v-model="item.optodo" >
+                                              <option required value="apply">Apply</option>
+                                              <option value="nothing">Nothing</option>
+                                              <option value="contact">Contact</option>
+                                              <option value="meet">Meeting</option>
+                                             </select>
+                                         <!-- <table>
                                            <tr>
                                              <th></th>
                                              <th>Status</th>
-                                             <th>To-Do</th>
+                                             <th>Task</th>
                                            </tr>
                                            <tr>
                                              <td>Current</td>
@@ -109,9 +128,10 @@
                                              <td>{{item.optodo}}</td>
                                            </tr>
                                            <tr>
+
                                              <td>New: </td>
                                              <td>
-                                               <select v-on:change="editOp" data-opstatus="item.opstatus" id="" class="select-wrapper form-control rounded-0" v-model="status" >
+                                               <select :data-opstatus="item.opstatus" id="" class="select-wrapper form-control rounded-0" v-model="item.opstatus" >
                                              <option required value="consider">Consider</option>
                                              <option value="applied">Applied</option>
                                              <option value="interview">Interview</option>
@@ -121,20 +141,21 @@
                                            </select>
                                          </td>
                                          <td>
-                                           <select v-on:change="editOp" data-opstatus="item.optodo" id="" class="select-wrapper form-control rounded-0" v-model="todo" >
-                                         <option required value="apply">Apply</option>
-                                         <option value="nothing">Nothing</option>
-                                         <option value="contact">Contact</option>
-                                         <option value="meet">Meeting</option>
-                                       </select>
+                                            <select :data-optodo="item.optodo" id="" class="select-wrapper form-control rounded-0" v-model="item.optodo" >
+                                             <option required value="apply">Apply</option>
+                                             <option value="nothing">Nothing</option>
+                                             <option value="contact">Contact</option>
+                                             <option value="meet">Meeting</option>
+                                            </select>
                                      </td>
                                        </tr>
-                                     </table>
+                                     </table> -->
                                        </div>
                                        <div class="modal-footer">
                                          <button type="button" class="btn btn-sm" style="color:#FAF9F9; background-color:#A2DAE8" data-dismiss="modal">Cancel</button>
-                                         <button type="button" class="btn btn-sm"  style="color:#FAF9F9; background-color:#395A4E">Save</button>
+                                         <button v-on:click="editOp"  :data-optodo="item.optodo" :data-opstatus="item.opstatus" :data-opemployer="item.opemployer" :data-oplocation="item.oplocation" :data-opjobtitle="item.opjobtitle" type="button" class="btn btn-sm"  style="color:#FAF9F9; background-color:#395A4E" data-dismiss="modal">Save</button>
                                        </div>
+                                     </form>
                                      </div>
                                    </div>
                                  </div>
@@ -155,13 +176,13 @@
                           <form class="form form-group form-inline" >
                             <tr>
                               <th>
-                                <input class="form-control rounded-0" v-model="enterKeyword" placeholder="Job Keyword">
+                                <input class="form-control rounded-0 input-sm" v-model="enterKeyword" placeholder="Job Keyword">
                               </th>
                               <th>
-                                <input class="form-control rounded-0" v-model="enterCity" placeholder="City">
+                                <input class="form-control rounded-0 input-sm" v-model="enterCity" placeholder="City">
                               </th>
                               <th>
-                                <select id="sqSelect" class="select-wrapper form-control rounded-0" v-model="enterState" placeholder="State">
+                                <select id="sqSelect" class="select-wrapper input-sm form-control rounded-0" v-model="enterState" placeholder="State">
                                 <option required value="">State</option>
                                 <option value="AL">AL</option>
                               	<option value="AK">AK</option>
@@ -217,11 +238,9 @@
                               </select>
                               </th>
                               <th>
-                                <button v-on:click="doSearch" class="btn" style="color:#FAF9F9; background-color:#395A4E" >Find</button>
-                                  <!-- </th> -->
+                                <button v-on:click="doSearch" class="btn btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Find</button>
                               </th>
                               <th>
-                                 <!-- Add? -->
                               </th>
                             </form>
                            </tr>
@@ -256,7 +275,7 @@
                                  <button :onclick="href=ad.url" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >View</button>
                               </td>
                               <td>
-                                <button :data-ad-jobtitle="ad.job_title" :data-ad-employer="ad.employer" :data-ad-location="ad.location" :data-ad-status="ad.status" :data-ad-todo="ad.status" :data-ad-url="ad.url" v-on:click="createCoOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
+                                <button :data-ad-jobtitle="ad.job_title" :data-ad-employer="ad.employer" :data-ad-location="ad.location" :data-ad-status="ad.status" :data-ad-todo="ad.todo" :data-ad-url="ad.url" v-on:click="createCoOp" class="btn btn-block btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Add</button>
                               </td>
                            </tr>
                         </table>
@@ -280,7 +299,7 @@
          </footer>
       </div>
       <script src="/main.js"></script>
-      <script>
+      <!-- <script>
       // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -306,7 +325,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-</script>
+</script> -->
       <script>
             function doModal(placementId, heading, formContent, strSubmitFunc, btnText)
       {

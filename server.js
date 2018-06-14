@@ -145,7 +145,10 @@ app.get('/dash/ops', function(req, res, next){
 
 app.post('/dash/delete_ops', function(req, res, next) {
   console.log('req.body:', req.body);
+  console.log(('asfafafasdfasdf'));
   var data = req.body
+  console.log('yafasfafasfasfaf');
+  console.log('data.opEmployer: ', data.opEmployer);
 
 
   CustardOp.findOneAndRemove({opemployer: data.opEmployer, oplocation: data.opLocation, opjobtitle: data.opJobtitle}, function(err, opschema) {
@@ -158,17 +161,21 @@ app.post('/dash/delete_ops', function(req, res, next) {
   });
 
 
-app.post('/edit_op', function(req, res, next) {
+
+app.post('/update', function(req, res, next) {
   console.log('req.body:', req.body);
   var data = req.body
-
-
-  CustardOp.findOneAndUpdate({opemployer: data.opemployer, oplocation: data.oplocation, opjobtitle: data.opjobtitle}, function(err, opschema) {
+  console.log('data:', data);
+  console.log('data.opjobtitle: ', data.opjobtitle);
+  CustardOp.findOneAndUpdate({opemployer: data.opemployer, oplocation: data.oplocation, opjobtitle: data.opjobtitle}, {$set: {opstatus: data.opstatus, optodo: data.optodo}}, function(err, opschema) {
     if (err) { res.json({"err": err});
   } else {
-    {$set: {opstatus: data.opstatus},  {optodo: data.optodo}}
+    console.log('yay twice');
+    console.log('data.opstatus:', data.opstatus);
+    console.log('data.optodo:', data.optodo);
+
     res.send('success!')
-        console.log(opschema + " removed!");
+        console.log(opschema + " updated!");
       }
     });
   });
@@ -202,4 +209,4 @@ app.get('/me/ops', function(req, res, next){
 //   console.log('Listening on port:', port)
 // })
 
-app.listen(80)
+app.listen(8080)

@@ -18,6 +18,17 @@ var mainVm = new Vue({
     el: '#app',
     data: {
       showModal: false,
+      applied: '',
+      interview: '',
+      offer: '',
+      declined: '',
+      rejected: '',
+      apply: '',
+      nothing: '',
+      contact: '',
+      meet: '',
+      status: '',
+      selected: '',
         newUserName: '',
         newUserPassword: '',
         oldUserName: '',
@@ -153,7 +164,6 @@ var mainVm = new Vue({
         doSearch: function(event) {
             event.preventDefault()
             console.log('this.keyword:', this.enterKeyword);
-            // var that = this
             $.ajax({
                 url: '/scrape',
                 type: 'POST',
@@ -172,15 +182,6 @@ var mainVm = new Vue({
 
                 }
             })
-            // console.log('this is data.kw:', data.kw);
-
-
-                    // $.get('/dash/jobads', (data) => {
-                    //         this.jobAds = data
-                    //     }).then((data) => {
-                    //       console.log('5555 data:', data);
-                    //     })
-                // },
 
         },
 
@@ -219,16 +220,16 @@ var mainVm = new Vue({
           console.log('data: ', data);
           event.preventDefault()
           $.ajax({
-              url: '/edit-op',
+              url: '/update',
               type: 'POST',
               data: JSON.stringify({
                   _custarduser: mainVm.user._id,
-                  opjobtitle: data.adJobtitle,
-                  opemployer: data.adEmployer,
-                  oplocation: data.adLocation,
-                  opurl: data.adUrl,
-                  optodo: data.adTodo,
-                  opstatus: data.adStatus
+                  opjobtitle: data.opjobtitle,
+                  opemployer: data.opemployer,
+                  oplocation: data.oplocation,
+                  opurl: data.opurl,
+                  optodo: data.optodo,
+                  opstatus: data.opstatus
               }),
               contentType: 'application/json; charset=utf-8',
               dataType: 'json',
