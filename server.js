@@ -100,7 +100,7 @@ app.post('/register-user', function(req, res, next){
     })
   })
 
-    
+
 
 app.post('/signin-user', function(req, res, next){
     console.log('/signin-user req.body:', req.body)
@@ -183,4 +183,4 @@ app.get('/me/ops', function(req, res, next){
     })
 })
 
-app.listen(8080)
+app.listen(80)

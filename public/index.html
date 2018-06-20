@@ -31,7 +31,7 @@
                         <form class="form form-group " v-on:submit="createUser">
                            <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
-                           <button v-on:click="RegisterUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
+                           <button disabled v-on:click="RegisterUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
                         </form>
                         <p></p>
                         <p>
@@ -46,7 +46,7 @@
                         <form class="form form-group " v-on:submit="signInUser">
                            <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="Password">
-                           <button v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
+                           <button disabled v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
                         </form>
                         <p class="signInUser">{{signin_msg}}</p>
                         <p>
@@ -55,6 +55,29 @@
                </div>
             </div>
          </div>
+     <div class="container" >
+       <div>
+         <div  class="col card border rounded-0 classWithPad" style="width: 18rem;">
+            <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-desktop"></i>
+            <div style="background-color:#FAF9F9" class="card-body classWithPad">
+               <h5 style="color:#395A4E " class="text-center card-title">Demo Mode</h5>
+               <div class="" >
+                 <p>Normal login has been disabled for demonstration purposes.  Please click on the Demo button.</p>
+                  <form class="form form-group " v-on:submit="signInUser">
+                     <input hidden value="Bob" type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
+                     <input hidden value="b" type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
+                     <button   v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Demo</button>
+                  </form>
+                  <p></p>
+                  <p>
+               </div>
+             </div>
+          </div>
+        </div>
+     </div>
+
+
+
          <footer class="footer">
             <div class="container" align="center">
                <a href="https://www.linkedin.com/in/howardvickers/" class="btn btn-social-icon btn-linkedin"><i class="fab fa-linkedin"></i></i></i></a>
