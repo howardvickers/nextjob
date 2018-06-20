@@ -21,6 +21,32 @@
                <img alt="logo" class="text-center" style="width: 200px; height: 150px" src="/img/nextjobsite_logo.png"></a>
             </div>
          </div>
+
+
+         <div class="container" >
+           <div align="center">
+             <div  class="col card border rounded-0 classWithPad" style="width: 28rem;">
+                <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-desktop"></i>
+                <div style="background-color:#FAF9F9" class="card-body classWithPad">
+                   <h5 style="color:#395A4E " class="text-center card-title">Demo Mode</h5>
+                   <div class="" >
+                     <p>Normal login has been disabled for demonstration purposes.  Please click on the Demo button.</p>
+                      <form class="form form-group " v-on:submit="signInUser">
+                         <input hidden value="Bob" type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
+                         <input hidden value="b" type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
+                         <button   v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Demo</button>
+                      </form>
+                      <p></p>
+                      <p>
+                   </div>
+                 </div>
+              </div>
+            </div>
+         </div>
+
+
+
+
          <div class="container" >
             <div class="row" align="center">
                <div  class="col card border rounded-0 classWithPad" style="width: 18rem;">
@@ -55,26 +81,6 @@
                </div>
             </div>
          </div>
-     <div class="container" >
-       <div>
-         <div  class="col card border rounded-0 classWithPad" style="width: 18rem;">
-            <i style="font-size:3em; color:#395A4E; text-align:center" class="fas fa-desktop"></i>
-            <div style="background-color:#FAF9F9" class="card-body classWithPad">
-               <h5 style="color:#395A4E " class="text-center card-title">Demo Mode</h5>
-               <div class="" >
-                 <p>Normal login has been disabled for demonstration purposes.  Please click on the Demo button.</p>
-                  <form class="form form-group " v-on:submit="signInUser">
-                     <input hidden value="Bob" type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
-                     <input hidden value="b" type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
-                     <button   v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Demo</button>
-                  </form>
-                  <p></p>
-                  <p>
-               </div>
-             </div>
-          </div>
-        </div>
-     </div>
 
 
 
