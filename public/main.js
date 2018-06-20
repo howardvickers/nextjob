@@ -1,7 +1,5 @@
-
 Vue.component('modal', {
-  template:
-  `<div class="modal is-active">
+    template: `<div class="modal is-active">
   <div class="modal-background">
   </div>
   <div class="modal-content">
@@ -17,20 +15,20 @@ Vue.component('modal', {
 var mainVm = new Vue({
     el: '#app',
     data: {
-      showModal: false,
-      applied: '',
-      interview: '',
-      offer: '',
-      declined: '',
-      rejected: '',
-      apply: '',
-      nothing: '',
-      contact: '',
-      meet: '',
-      status: '',
-      selected: '',
-      signin_msg: '',
-      register_msg: '',
+        showModal: false,
+        applied: '',
+        interview: '',
+        offer: '',
+        declined: '',
+        rejected: '',
+        apply: '',
+        nothing: '',
+        contact: '',
+        meet: '',
+        status: '',
+        selected: '',
+        signin_msg: '',
+        register_msg: '',
         newUserName: '',
         newUserPassword: '',
         oldUserName: '',
@@ -66,8 +64,7 @@ var mainVm = new Vue({
             this.allOps = data
             console.log('77777 data:', data);
             console.log('777 this.allOps:', this.allOps)
-        }).then(() => {
-        })
+        }).then(() => {})
 
         // $.get('/dash/jobads', (data) => {
         //         this.jobAds = data
@@ -77,34 +74,32 @@ var mainVm = new Vue({
     },
 
     methods: {
-      modalID: function(url){
-        return btoa(url).replace(/=/g, '')
-      },
-      hashmodalID: function(url){
-        return '#'+btoa(url).replace(/=/g, '')
-      },
-      openModal: function(e) {
-        e.preventDefault()
-        var oModal = e.currentTarget.dataset.modalTarget
-        console.log('oModal:', oModal);
-        $(oModal).modal('toggle')
+        modalID: function(url) {
+            return btoa(url).replace(/=/g, '')
+        },
+        hashmodalID: function(url) {
+            return '#' + btoa(url).replace(/=/g, '')
+        },
+        openModal: function(e) {
+            e.preventDefault()
+            var oModal = e.currentTarget.dataset.modalTarget
+            console.log('oModal:', oModal);
+            $(oModal).modal('toggle')
 
-      },
+        },
 
         getMyCompanys: function() {
             $.get('/dash/companys', (data) => {
                 this.allCompanys = data
                 console.log('this.allCompanys:', this.allCompanys)
-            }).then(() => {
-            })
+            }).then(() => {})
         },
 
         getMyOps: function() {
             $.get('/dash/ops', (data) => {
                 this.allOps = data
                 console.log('888 this.allOps:', this.allOps)
-            }).then(() => {
-            })
+            }).then(() => {})
         },
 
 
@@ -137,32 +132,6 @@ var mainVm = new Vue({
         },
 
 
-        // theSearch: function(event) {
-        //     event.preventDefault()
-        //     console.log('this.keyword:', this.enterKeyword);
-        //     // var that = this
-        //     $.ajax({
-        //         url: '/dash/jobads',
-        //         type: 'POST',
-        //         data: JSON.stringify({
-        //             kw: this.enterKeyword,
-        //             cty: this.enterCity,
-        //             ste: this.enterState
-        //         }),
-        //         contentType: 'application/json; charset=utf-8',
-        //         dataType: 'json',
-        //         success: function(dataFromServer) {
-        //             console.log('/dash/ops dataFromServer: ', dataFromServer)
-        //             // if (dataFromServer.success) {
-        //             //     window.location.href = "/dashboard.html"
-        //             // }
-        //         }
-        //     })
-        //     console.log('data:', this);
-        //
-        // },
-
-
         doSearch: function(event) {
             event.preventDefault()
             console.log('this.keyword:', this.enterKeyword);
@@ -188,196 +157,137 @@ var mainVm = new Vue({
         },
 
         createCoOp: function(event) {
-          console.log('event', event);
-          var data = event.target.dataset
-          console.log('data: ', data);
-          event.preventDefault()
-          $.ajax({
-              url: '/create-op',
-              type: 'POST',
-              data: JSON.stringify({
-                  _custarduser: mainVm.user._id,
-                  opjobtitle: data.adJobtitle,
-                  opemployer: data.adEmployer,
-                  oplocation: data.adLocation,
-                  opurl: data.adUrl,
-                  optodo: data.adTodo,
-                  opstatus: data.adStatus
-              }),
-              contentType: 'application/json; charset=utf-8',
-              dataType: 'json',
-              success: function(dataFromServer) {
-                  console.log('/create-op dataFromServer: ', dataFromServer)
-                  if (dataFromServer.success) {
-                      mainVm.getMyOps()
-                      console.log('success! yay!');
-                  }
-              }
-          })
+            console.log('event', event);
+            var data = event.target.dataset
+            console.log('data: ', data);
+            event.preventDefault()
+            $.ajax({
+                url: '/create-op',
+                type: 'POST',
+                data: JSON.stringify({
+                    _custarduser: mainVm.user._id,
+                    opjobtitle: data.adJobtitle,
+                    opemployer: data.adEmployer,
+                    oplocation: data.adLocation,
+                    opurl: data.adUrl,
+                    optodo: data.adTodo,
+                    opstatus: data.adStatus
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(dataFromServer) {
+                    console.log('/create-op dataFromServer: ', dataFromServer)
+                    if (dataFromServer.success) {
+                        mainVm.getMyOps()
+                        console.log('success! yay!');
+                    }
+                }
+            })
         },
 
         editOp: function(event) {
-          console.log('event', event);
-          var data = event.target.dataset
-          console.log('data: ', data);
-          event.preventDefault()
-          $.ajax({
-              url: '/update',
-              type: 'POST',
-              data: JSON.stringify({
-                  _custarduser: mainVm.user._id,
-                  opjobtitle: data.opjobtitle,
-                  opemployer: data.opemployer,
-                  oplocation: data.oplocation,
-                  opurl: data.opurl,
-                  optodo: data.optodo,
-                  opstatus: data.opstatus
-              }),
-              contentType: 'application/json; charset=utf-8',
-              dataType: 'json',
-              success: function(dataFromServer) {
-                  console.log('/edit-op dataFromServer: ', dataFromServer)
-                  if (dataFromServer.success) {
-                      mainVm.getMyOps()
-                      console.log('success! yay!');
-                  }
-              }
-          })
+            console.log('event', event);
+            var data = event.target.dataset
+            console.log('data: ', data);
+            event.preventDefault()
+            $.ajax({
+                url: '/update',
+                type: 'POST',
+                data: JSON.stringify({
+                    _custarduser: mainVm.user._id,
+                    opjobtitle: data.opjobtitle,
+                    opemployer: data.opemployer,
+                    oplocation: data.oplocation,
+                    opurl: data.opurl,
+                    optodo: data.optodo,
+                    opstatus: data.opstatus
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(dataFromServer) {
+                    console.log('/edit-op dataFromServer: ', dataFromServer)
+                    if (dataFromServer.success) {
+                        mainVm.getMyOps()
+                        console.log('success! yay!');
+                    }
+                }
+            })
         },
 
-                signInUser: function(event) {
-                    event.preventDefault()
-                    var that = this
-                    console.log('signInUser this.oldUserName: ', this.oldUserName)
-                    $.ajax({
-                        url: '/signin-user',
-                        type: 'POST',
-                        data: JSON.stringify({
-                            username: this.oldUserName,
-                            password: this.oldUserPassword
-                        }),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function(dataFromServer) {
-                            console.log('/signin-user dataFromServer: ', dataFromServer)
-                            if (dataFromServer.success) {
-                                window.location.href = "/dashboard.html"
-                            } else {
-                              signin_msg = 'Nope!'
-                            }
-                        }
-                    })
-                },
+        signInUser: function(event) {
+            event.preventDefault()
+            var that = this
+            console.log('signInUser this.oldUserName: ', this.oldUserName)
+            $.ajax({
+                url: '/signin-user',
+                type: 'POST',
+                data: JSON.stringify({
+                    username: this.oldUserName,
+                    password: this.oldUserPassword
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(dataFromServer) {
+                    console.log('/signin-user dataFromServer: ', dataFromServer)
+                    if (dataFromServer.success) {
+                        window.location.href = "/dashboard.html"
+                    } else {
+                        signin_msg = 'Nope!'
+                    }
+                }
+            })
+        },
 
-                RegisterUser: function(event) {
-                    event.preventDefault()
-                    var that = this
-                    console.log('RegisterUser this.newUserName: ', this.newUserName)
-                    $.ajax({
-                        url: '/register-user',
-                        type: 'POST',
-                        data: JSON.stringify({
-                            username: this.newUserName,
-                            password: this.newUserPassword
-                        }),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function(dataFromServer) {
-                            console.log('/register-user dataFromServer: ', dataFromServer)
-                            if (dataFromServer.success) {
-                                window.location.href = "/dashboard.html"
-                            } else {
-                              register_msg = 'Nope!'
-                            }
-                        }
-                    })
-                },
+        RegisterUser: function(event) {
+            event.preventDefault()
+            var that = this
+            console.log('RegisterUser this.newUserName: ', this.newUserName)
+            $.ajax({
+                url: '/register-user',
+                type: 'POST',
+                data: JSON.stringify({
+                    username: this.newUserName,
+                    password: this.newUserPassword
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function(dataFromServer) {
+                    console.log('/register-user dataFromServer: ', dataFromServer)
+                    if (dataFromServer.success) {
+                        window.location.href = "/dashboard.html"
+                    } else {
+                        register_msg = 'Nope!'
+                    }
+                }
+            })
+        },
 
         logOutUser: function(event) {
             event.preventDefault()
             window.location.href = "/index.html"
         },
 
-        // createCompany: function(event) {
-        //     event.preventDefault()
-        //     $.ajax({
-        //         url: '/create-company',
-        //         type: 'POST',
-        //         data: JSON.stringify({
-        //             _custarduser: mainVm.user._id,
-        //             companyname: this.enterCompanyName,
-        //             companyperson: this.enterCompanyPerson,
-        //             companyaddress: this.enterCompanyAddress,
-        //             companytel: this.enterCompanyTel
-        //         }),
-        //         contentType: 'application/json; charset=utf-8',
-        //         dataType: 'json',
-        //         success: function(dataFromServer) {
-        //             console.log('/create-company dataFromServer: ', dataFromServer)
-        //             if (dataFromServer.success) {
-        //                 mainVm.getMyCompanys()
-        //                 console.log('success! yay!');
-        //             }
-        //         }
-        //     })
-        //     this.enterCompanyName = ''
-        //     this.enterCompanyPerson = ''
-        //     this.enterCompanyAddress = ''
-        //     this.enterCompanyTel = ''
-        //     this.confirmAdded()
-        // },
-
         deleteOp: function(event) {
-          console.log('event', event);
-          var data = event.target.dataset
-          console.log('opurl to delete data.opurl: ', data);
-          event.preventDefault()
-          $.ajax({
-            method: "POST",
-            url: "/dash/delete_ops",
-            data: {
-              opJobtitle: data.opjobtitle,
-              opEmployer: data.opemployer,
-              opLocation: data.oplocation
-            }
-            ,
-            success: "yay"
-          }).done((msg) => {
-            console.log(msg);
-              this.getMyOps()
-          })
+            console.log('event', event);
+            var data = event.target.dataset
+            console.log('opurl to delete data.opurl: ', data);
+            event.preventDefault()
+            $.ajax({
+                method: "POST",
+                url: "/dash/delete_ops",
+                data: {
+                    opJobtitle: data.opjobtitle,
+                    opEmployer: data.opemployer,
+                    opLocation: data.oplocation
+                },
+                success: "yay"
+            }).done((msg) => {
+                console.log(msg);
+                this.getMyOps()
+            })
 
-           },
+        },
 
-
-        // createOp: function(event) {
-        //     event.preventDefault()
-        //     $.ajax({
-        //         url: '/create-op',
-        //         type: 'POST',
-        //         data: JSON.stringify({
-        //             _custarduser: mainVm.user._id,
-        //             companyname: this.enterCompanyName,
-        //             companyperson: this.enterCompanyPerson,
-        //             companyaddress: this.enterCompanyAddress,
-        //             companytel: this.enterCompanyTel
-        //         }),
-        //         contentType: 'application/json; charset=utf-8',
-        //         dataType: 'json',
-        //         success: function(dataFromServer) {
-        //             console.log('/create-op dataFromServer: ', dataFromServer)
-        //             if (dataFromServer.success) {
-        //                 mainVm.getMyCompanys()
-        //                 console.log('success op! yay!');
-        //             }
-        //         }
-        //     })
-        //     this.enterCompanyName = ''
-        //     this.enterCompanyPerson = ''
-        //     this.enterCompanyAddress = ''
-        //     this.enterCompanyTel = ''
-        //     this.confirmAdded()
-        // },
 
         confirmAdded: function() {
             this.confirmCompanyAdded = 'New Company Added!'
