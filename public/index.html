@@ -31,7 +31,7 @@
                         <form class="form form-group " v-on:submit="createUser">
                            <input  type="text" class="form-control rounded-0" v-model="newUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="newUserPassword" placeholder="Password">
-                           <button v-on:click="Register" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
+                           <button v-on:click="RegisterUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Register</button>
                         </form>
                         <p></p>
                         <p>
@@ -46,7 +46,7 @@
                         <form class="form form-group " v-on:submit="signInUser">
                            <input  type="text" class="form-control rounded-0" v-model="oldUserName" placeholder="User">
                            <input type="password" class="form-control rounded-0" v-model="oldUserPassword" placeholder="Password">
-                           <button v-on:click="Login" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
+                           <button v-on:click="signInUser" class="btn btn-block" style="color:#FAF9F9; background-color:#395A4E" >Login</button>
                         </form>
                         <p class="signInUser">{{signin_msg}}</p>
                         <p>

@@ -29,6 +29,8 @@ var mainVm = new Vue({
       meet: '',
       status: '',
       selected: '',
+      signin_msg: '',
+      register_msg: '',
         newUserName: '',
         newUserPassword: '',
         oldUserName: '',
@@ -53,12 +55,12 @@ var mainVm = new Vue({
     },
 
     created: function() {
-        $.get('/dash/companys', (data) => {
-            this.allCompanys = data
-            console.log('333333 data:', data);
-            console.log('333333 this.allCompanys:', this.allCompanys)
-        }).then(() => {
-        }),
+        // $.get('/dash/companys', (data) => {
+        //     this.allCompanys = data
+        //     console.log('333333 data:', data);
+        //     console.log('333333 this.allCompanys:', this.allCompanys)
+        // }).then(() => {
+        // }),
 
         $.get('/dash/ops', (data) => {
             this.allOps = data
@@ -243,29 +245,53 @@ var mainVm = new Vue({
           })
         },
 
-        signInUser: function(event) {
-            event.preventDefault()
-            var that = this
-            console.log('signInUser this.oldUserName: ', this.oldUserName)
-            $.ajax({
-                url: '/signin-user',
-                type: 'POST',
-                data: JSON.stringify({
-                    username: this.oldUserName,
-                    password: this.oldUserPassword
-                }),
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function(dataFromServer) {
-                    console.log('/signin-user dataFromServer: ', dataFromServer)
-                    if (dataFromServer.success) {
-                        window.location.href = "/dashboard.html"
-                    } else {
-                      signin_msg = 'Nope!'
-                    }
-                }
-            })
-        },
+                signInUser: function(event) {
+                    event.preventDefault()
+                    var that = this
+                    console.log('signInUser this.oldUserName: ', this.oldUserName)
+                    $.ajax({
+                        url: '/signin-user',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            username: this.oldUserName,
+                            password: this.oldUserPassword
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(dataFromServer) {
+                            console.log('/signin-user dataFromServer: ', dataFromServer)
+                            if (dataFromServer.success) {
+                                window.location.href = "/dashboard.html"
+                            } else {
+                              signin_msg = 'Nope!'
+                            }
+                        }
+                    })
+                },
+
+                RegisterUser: function(event) {
+                    event.preventDefault()
+                    var that = this
+                    console.log('RegisterUser this.newUserName: ', this.newUserName)
+                    $.ajax({
+                        url: '/register-user',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            username: this.newUserName,
+                            password: this.newUserPassword
+                        }),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function(dataFromServer) {
+                            console.log('/register-user dataFromServer: ', dataFromServer)
+                            if (dataFromServer.success) {
+                                window.location.href = "/dashboard.html"
+                            } else {
+                              register_msg = 'Nope!'
+                            }
+                        }
+                    })
+                },
 
         logOutUser: function(event) {
             event.preventDefault()

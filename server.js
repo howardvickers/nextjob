@@ -21,9 +21,6 @@ let doScrape = async function(keyword, city, state) {
   var url_to_scrape = 'https://www.themuse.com/jobs?keyword%5B%5D='+keyword+'&job_location%5B%5D='+city+'%2C%20'+state+'&filter=true'
   await page.goto(url_to_scrape);
 
-
-
-
   const result = await page.evaluate(() => {
       let data = []; // Create an empty array that will store our data
       let elements = document.querySelectorAll('.job-list-individual'); // Select all Products
@@ -83,24 +80,27 @@ app.post('/create-op', function(req, res, next){
   console.log('/create-op req.body:', req.body)
   var newOp = new CustardOp(req.body)
   newOp.save(function(err){
-    if (err){next(err)}
+    if (err){next(err);
+    console.log('err:' , err);}
     else {
       res.send({success:'Successfully created new op'})
     }
   })
 })
 
+app.post('/register-user', function(req, res, next){
+    console.log('/register-user req.body:', req.body)
+    var newUser = new CustardUser(req.body)
+    newUser.save(function(err) {
+      if (err){next(err);
+      console.log('err:', err);}
+      else {
+        res.send({success:'Successfully registered new user'})
+      }
+    })
+  })
 
-// app.post('/edit-op', function(req, res, next){
-//   console.log('/edit-op req.body:', req.body)
-//   var newOp = new CustardOp(req.body)
-//   newOp.save(function(err){
-//     if (err){next(err)}
-//     else {
-//       res.send({success:'Successfully created new op'})
-//     }
-//   })
-// })
+    
 
 app.post('/signin-user', function(req, res, next){
     console.log('/signin-user req.body:', req.body)
@@ -120,21 +120,11 @@ app.get('/dash', function(req, res){
     res.send(user)
 })
 
-// app.get('/dash/companys', function(req, res, next){
-//   console.log('/dash/companys called!');
-//   CustardCompany.find({_custarduser: user._id}, function(err, data){
-//     if (err) { next(err)
-//     } else {
-//       res.send(data)
-//       console.log('Yo! /dash/companys data:', data)
-//     }
-//   })
-// })
-
-
 app.get('/dash/ops', function(req, res, next){
   console.log('/dash/ops called!');
+  console.log('req here: ', req);
   CustardOp.find({_custarduser: user._id}, function(err, data){
+    console.log('user._id', user._id);
     if (err) { next(err)
     } else {
       res.send(data)
@@ -160,8 +150,6 @@ app.post('/dash/delete_ops', function(req, res, next) {
     });
   });
 
-
-
 app.post('/update', function(req, res, next) {
   console.log('req.body:', req.body);
   var data = req.body
@@ -180,12 +168,6 @@ app.post('/update', function(req, res, next) {
     });
   });
 
-app.get('/dash/jobads', function(req, res, next){
-  console.log('req.body:' , req.body);
-  var scrapedData = doScrape('Java', 'Golden', 'CO').then((value) => res.send(value) );
-})
-
-
 app.post('/scrape', function(req, res, next){
   console.log('req.body:' , req.body);
   var scrapedData = doScrape(req.body.kw, req.body.cty, req.body.ste,).then((value) => res.send(value) );
@@ -200,13 +182,5 @@ app.get('/me/ops', function(req, res, next){
         }
     })
 })
-
-// var port = process.env.PORT || 8080
-// var port = normalizePort(process.env.PORT || '8080');
-//
-// // var port = 8080
-// app.listen(port, function(){
-//   console.log('Listening on port:', port)
-// })
 
 app.listen(8080)
