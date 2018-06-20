@@ -121,14 +121,13 @@ app.get('/dash', function(req, res){
 })
 
 app.get('/dash/ops', function(req, res, next){
-  console.log('/dash/ops called!');
-  console.log('req here: ', req);
+  console.log('/dash/ops req: ', req);
   CustardOp.find({_custarduser: user._id}, function(err, data){
     console.log('user._id', user._id);
     if (err) { next(err)
     } else {
       res.send(data)
-      console.log('Look! /dash/ops data:', data)
+      console.log('/dash/ops data:', data)
     }
   })
 });
@@ -158,7 +157,6 @@ app.post('/update', function(req, res, next) {
   CustardOp.findOneAndUpdate({opemployer: data.opemployer, oplocation: data.oplocation, opjobtitle: data.opjobtitle}, {$set: {opstatus: data.opstatus, optodo: data.optodo}}, function(err, opschema) {
     if (err) { res.json({"err": err});
   } else {
-    console.log('yay twice');
     console.log('data.opstatus:', data.opstatus);
     console.log('data.optodo:', data.optodo);
 
@@ -183,4 +181,4 @@ app.get('/me/ops', function(req, res, next){
     })
 })
 
-app.listen(80)
+app.listen(8080)
