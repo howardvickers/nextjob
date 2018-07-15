@@ -30,7 +30,6 @@ color: #9356C4;
 .title{
     font-family: Arial, Helvetica, sans-serif;
     color: green;
-
 }
 
 .invisible{
@@ -40,6 +39,7 @@ color: #9356C4;
 .questionWord{
     text-align: center;
 }
+
 .well:hover {
     background-color: lightblue;
 }
