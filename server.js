@@ -80,6 +80,7 @@ app.post('/custard-user', function(req, res, next) {
 })
 
 app.post('/create-op', function(req, res, next) {
+  console.log('/create-op _custarduser: ', user._id);
     console.log('/create-op req.body:', req.body)
     var newOp = new CustardOp(req.body)
     newOp.save(function(err) {
@@ -93,6 +94,11 @@ app.post('/create-op', function(req, res, next) {
         }
     })
 })
+
+app.get('/me', function(req, res){
+    res.send(user)
+})
+
 
 app.post('/register-user', function(req, res, next) {
     console.log('/register-user req.body.username:', req.body.username)
@@ -130,17 +136,61 @@ app.post('/signin-user', function(req, res, next) {
     })
 })
 
+app.post('/signin-demo', function(req, res, next) {
+    console.log('/signin-demo req.body:', req.body)
+    CustardUser.findOne({
+        username: req.body.username
+    }, function(err, data) {
+        if (err) {
+            next(err)
+        } else if (data) {
+            user = data
+            console.log('Demo signed in: ', data)
+            res.send({
+                success: '200'
+            })
+        } else {
+            res.send({
+                failure: 'Failed to login demo'
+            })
+        }
+    })
+})
+
 app.get('/dash', function(req, res) {
     res.send(user)
 })
 
-app.get('/dash/ops', function(req, res, next) {
-    console.log('/dash/ops req: ', req);
+app.post('/refresh-ops', function(req, res, next){
+  console.log('/refresh-ops req.body:', req.body);
+  console.log('/refresh-ops _custarduser: ', user._id);
+  CustardOp.find({
+      _custarduser: user._id
+  }, function(err, data){
+    // if (err){
+    //   next(err)
+    // } else {
+      res.send(data)
+      console.log('refresh-ops data: ', data);
+    // }
+  });
+});
+
+app.post('/dash/ops', function(req, res, next) {
+    console.log('********************************');
+    // console.log('/dash/ops req.body: ', req.body);
+    console.log('/dash/ops _custarduser: ', user._id);
     CustardOp.find({
         _custarduser: user._id
     }, function(err, data) {
-        console.log('user._id', user._id);
-        if (err) {
+        console.log('user._id here', user._id);
+        if (err & err.code === 11000) {
+          req.flash('error', 'This opportunity already exists')
+          req.redirect('./dashboard.html')
+            next(err)
+        } if (err & err.code !== 11000) {
+          req.flash('error', 'Another error happened')
+          req.redirect('./dashboard.html')
             next(err)
         } else {
             res.send(data)
@@ -199,7 +249,7 @@ app.post('/update', function(req, res, next) {
 });
 
 app.post('/scrape', function(req, res, next) {
-    console.log('req.body:', req.body);
+    console.log('/scrape req.body:', req.body);
     var scrapedData = doScrape(req.body.kw, req.body.cty, req.body.ste, ).then((value) => res.send(value));
 })
 
@@ -216,4 +266,4 @@ app.get('/me/ops', function(req, res, next) {
     })
 })
 
-app.listen(80)
+app.listen(8080)
