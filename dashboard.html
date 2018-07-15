@@ -27,9 +27,9 @@
                   <i style="font-size:3em; color:#395A4E; text-align:center" class="far fa-list-alt">
                      <h5 style="color:#395A4E" class="card-title">My Job Opportunities</h5>
                   </i>
-                  </br>
+                  <!-- </br>
                   <button v-on:click="refreshOps" class="btn btn-sm" style="color:#FAF9F9; background-color:#395A4E" >Refresh Opportunities</button>
-                  </br>
+                  </br> -->
                   <div style="overflow-y:scroll; background-color:#FAF9F9" class="card-body classWithPad"   >
                      <div class="container" id="">
                         <table style="font-size:small" class="table table-striped table-hover">
@@ -70,7 +70,7 @@
                                  {{item.oplocation}}
                               </td>
                               <td>
-                                 <a :onclick="href=item.opurl" target="_blank"><i style="font-size:2em; color:#395A4E; text-align:center" class="far fa-eye"></i></a>
+                                 <a :onclick="href=item.opurl" ><i style="font-size:2em; color:#395A4E; text-align:center" class="far fa-eye"></i></a>
                               </td>
                               <td>
                                  {{item.opstatus}}

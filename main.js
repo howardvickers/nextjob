@@ -49,6 +49,7 @@ var mainVm = new Vue({
       $.get('/me', function(data){
         mainVm.user = data
           this.user = data
+          mainVm.refreshOps()
           console.log('this.user = data: ', data, this.user);
           console.log('that.user: ', that.user)
       })
@@ -111,12 +112,12 @@ var mainVm = new Vue({
             this.jobAds = data
             console.log('this.jobAds:', this.jobAds)
         },
-        //
-        // displayOps: function(data) {
-        //     this.allOps = data
-        //     console.log('3232323232 this.allOps:', this.allOps)
-        //
-        // },
+
+        displayOps: function(data) {
+            this.allOps = data
+            console.log('3232323232 this.allOps:', this.allOps)
+
+        },
 
         doSearch: function(event) {
             event.preventDefault()
