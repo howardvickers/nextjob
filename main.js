@@ -36,46 +36,21 @@ var mainVm = new Vue({
         oldUserPassword: '',
         user: {},
         href: '',
-        // signin_msg = '',
-        allCompanys: [],
         allOps: [],
         jobAds: [],
-        isInVisible: true,
-        isVisible: false,
-        invisible: '',
         enterState: '',
         enterCity: '',
-        enterKeyword: '',
-        enterCompanyName: '',
-        enterCompanyPerson: '',
-        enterCompanyAddress: '',
-        enterCompanyTel: '',
-        confirmCompanyAdded: ''
+        enterKeyword: ''
     },
 
     created: function() {
-      console.log('created called!!!!!!!!!!!!!!!!');
+      console.log('created called');
       let that = this
       $.get('/me', function(data){
-        console.log('/me called');
-        console.log('this is THIS at created: ', this);
-        console.log('this is THAT at created: ', that);
-        console.log('this is THAT._data at created: ', that._data);
-        console.log('data.password: ', data.password );
-        console.log('mainVm.user: ', mainVm.user);
         mainVm.user = data
-        console.log('mainVm.user again: ', mainVm.user);
-        console.log('mainVm.user._id again: ', mainVm.user._id);
-
-        console.log('this is THAT._data.user at created: ', that._data.user);
-
-
           this.user = data
-          // var the_user = data
           console.log('this.user = data: ', data, this.user);
-          // console.log('the_user: ', the_user);
           console.log('that.user: ', that.user)
-
       })
 
         $.get('/dash/ops', (data) => {
@@ -83,12 +58,6 @@ var mainVm = new Vue({
             console.log('77777 data:', data);
             console.log('777 this.allOps:', this.allOps)
         }).then(() => {})
-
-        // $.get('/dash/jobads', (data) => {
-        //         this.jobAds = data
-        //     }).then((data) => {
-        //       console.log('5555 data:', data);
-        //     })
     },
 
     methods: {
@@ -103,36 +72,23 @@ var mainVm = new Vue({
             var oModal = e.currentTarget.dataset.modalTarget
             console.log('oModal:', oModal);
             $(oModal).modal('toggle')
-
         },
 
-        // getMyCompanys: function() {
-        //     $.get('/dash/companys', (data) => {
-        //         this.allCompanys = data
-        //         console.log('this.allCompanys:', this.allCompanys)
-        //     }).then(() => {})
-        // },
-
         getMyOps: function() {
-          console.log('getMyOps initiated!!!!!!');
-
+          console.log('getMyOps initiated')
             $.get('/dash/ops', (data) => {
                 this.allOps = data
-                console.log('888 this.allOps:', this.allOps)
+                console.log('this.allOps:', this.allOps)
             }).then(() => {})
         },
 
-
         refreshOps: function(event) {
-            // var data = event.target.dataset
-            // event.preventDefault()
             console.log('refreshOps mainVm.user._id: ', mainVm.user._id);
             console.log('refreshOps this.user._id: ', this.user._id);
             $.ajax({
                 url: '/refresh-ops',
                 type: 'POST',
                 data: JSON.stringify({
-                  // _custarduser: mainVm.user._id
                   _custarduser: mainVm.user._id
                 }),
                 contentType: 'application/json; charset=utf-8',
@@ -145,9 +101,7 @@ var mainVm = new Vue({
                     console.log('this.allOps: ', this.allOps);
                     if (dataFromServer.success) {
                       console.log('this:', this.allOps);
-                      // allOps = dataFromServer
-                        // mainVm.getMyOps()
-                        console.log('refresh-ops success! yay!');
+                        console.log('refresh-ops success!');
                     }
                 }
             })
@@ -155,39 +109,14 @@ var mainVm = new Vue({
 
         getJobAds: function(data) {
             this.jobAds = data
-            console.log('222 this.jobAds:', this.jobAds)
+            console.log('this.jobAds:', this.jobAds)
         },
-
-        displayOps: function(data) {
-            this.allOps = data
-            console.log('3232323232 this.allOps:', this.allOps)
-
-        },
-
-        // createUser: function(event) {
-        //   console.log('createUser initiated!!!!! :)');
-        //     event.preventDefault()
-        //     var that = this
-        //     console.log('this.newUserName:', this.newUserName)
-        //     $.ajax({
-        //         url: '/custard-user',
-        //         type: 'POST',
-        //         data: JSON.stringify({
-        //             // username: this.newUserName,
-        //             username: 'rabbit',
-        //             password: this.newUserPassword
-        //         }),
-        //         contentType: 'application/json; charset=utf-8',
-        //         dataType: 'json',
-        //         success: function(dataFromServer) {
-        //             console.log('/custard-user dataFromServer: ', dataFromServer)
-        //             if (dataFromServer.success) {
-        //                 window.location.href = "/dashboard.html"
-        //             }
-        //         }
-        //     })
-        // },
         //
+        // displayOps: function(data) {
+        //     this.allOps = data
+        //     console.log('3232323232 this.allOps:', this.allOps)
+        //
+        // },
 
         doSearch: function(event) {
             event.preventDefault()
@@ -205,12 +134,9 @@ var mainVm = new Vue({
                 success: function(dataFromServer) {
                     console.log('/scrape dataFromServer: ', dataFromServer)
                     this.jobAds = dataFromServer
-                    console.log('this.jobAds:', this.jobAds);
                     mainVm.getJobAds(dataFromServer)
-
                 }
             })
-
         },
 
         createCoOp: function(event) {
@@ -299,7 +225,6 @@ var mainVm = new Vue({
 
         signInDemo: function(event) {
             event.preventDefault()
-            // var that = this
             console.log('signInDemo this.oldUserName: ', "Bob!")
             $.ajax({
                 url: '/signin-demo',
@@ -347,16 +272,9 @@ var mainVm = new Vue({
 
         logOutUser: function(event) {
             event.preventDefault()
-            mainVm.user = 'yo!'
+            mainVm.user = ''
             window.location.href = "/index.html"
         },
-
-
-        // refreshOps: function(event) {
-        //     console.log('clicked "refreshOps"!!!!!');
-        //     event.preventDefault()
-        //     mainVm.getMyOps()
-        // },
 
         deleteOp: function(event) {
             console.log('event', event);
@@ -377,15 +295,6 @@ var mainVm = new Vue({
                 this.getMyOps()
                 this.refreshOps()
             })
-
         },
-
-
-        // confirmAdded: function() {
-        //     this.confirmCompanyAdded = 'New Company Added!'
-        //     setTimeout(() => {
-        //         this.confirmCompanyAdded = ''
-        //     }, 2000)
-        // },
     }
 })

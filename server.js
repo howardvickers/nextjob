@@ -167,12 +167,8 @@ app.post('/refresh-ops', function(req, res, next){
   CustardOp.find({
       _custarduser: user._id
   }, function(err, data){
-    // if (err){
-    //   next(err)
-    // } else {
       res.send(data)
       console.log('refresh-ops data: ', data);
-    // }
   });
 });
 
